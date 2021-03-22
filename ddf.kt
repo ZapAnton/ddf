@@ -9,5 +9,9 @@ fun main() {
         .walkTopDown()
         .filter { it.isFile() }
         .forEach { files.add(FileInfo(it.nameWithoutExtension, it.extension, it.length().toDouble())) }
-    files.forEach { println(it) }
+    val maxSizeFile = files.maxByOrNull { it.size }
+    if (maxSizeFile == null) {
+        return
+    }
+    println("Largest file in '.': '${ maxSizeFile.name }.${maxSizeFile.extension}' -- ${ maxSizeFile.size / 1024 } Kb")
 }
